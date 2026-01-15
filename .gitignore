@@ -20,6 +20,9 @@ papers/
 downloads/
 *.pdf
 
+# Screenshots (keep in repo for README)
+# screenshots/
+
 # Session data
 sessions/
 *.session
