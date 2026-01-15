@@ -1,0 +1,56 @@
+<div class="flex flex-col h-full bg-white dark:bg-gray-900 overflow-hidden">
+    <!-- Top Section: Stats & Active Tools Status -->
+    <div id="tool-viewer-top" class="shrink-0 flex flex-col border-b border-gray-200 dark:border-gray-800"
+        style="height: 180px; min-height: 100px;">
+        <div class="p-4 flex items-center justify-between bg-white dark:bg-gray-900 shrink-0">
+            <h3 class="font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                Tool Execution
+            </h3>
+            <button id="clear-logs"
+                class="text-xs text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">Clear</button>
+        </div>
+
+        <div class="px-4 pb-4 flex-1 overflow-y-auto custom-scrollbar">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800">
+                    <div class="text-[10px] uppercase tracking-wider text-gray-500 mb-1 leading-none">Total Calls</div>
+                    <div id="tool-count-total" class="text-xl font-bold leading-none">0</div>
+                </div>
+                <div class="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800">
+                    <div class="text-[10px] uppercase tracking-wider text-gray-500 mb-1 leading-none">Success</div>
+                    <div id="tool-success-rate" class="text-xl font-bold leading-none text-green-500">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vertical Resizer for Tool Viewer -->
+    <div id="resizer-tool-v" class="resizer-v h-1.5 shrink-0 hover:bg-blue-500/30 transition-colors cursor-ns-resize">
+    </div>
+
+    <!-- Bottom Section: Detailed Logs -->
+    <div id="tool-viewer-bottom" class="flex-1 overflow-hidden flex flex-col">
+        <div
+            class="px-4 py-2 border-b border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 flex items-center justify-between shrink-0">
+            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Logs</span>
+            <button id="export-logs" class="text-[10px] text-blue-500 hover:underline">Export</button>
+        </div>
+        <div id="tool-logs" class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar bg-white dark:bg-gray-900">
+            <div id="no-tools-message"
+                class="flex flex-col items-center justify-center h-full text-center p-8 opacity-50">
+                <div class="w-12 h-12 mb-3 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37z">
+                        </path>
+                    </svg>
+                </div>
+                <p class="text-sm text-gray-500">Wait for execution...</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+[project]
+name = "mcp-agent-ui"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "aiohttp>=3.13.3",
+    "asyncio>=4.0.0",
+    "flask>=3.1.2",
+    "flask-cors>=6.0.2",
+    "flask-sse>=1.0.0",
+    "langchain-groq>=1.1.1",
+    "mcp-use>=1.5.2",
+    "python-dotenv>=1.2.1",
+    "websockets>=16.0",
+]

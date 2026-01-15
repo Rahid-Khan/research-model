@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Settings - MCP Agent{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-8">Settings</h1>
+    
+    <div class="space-y-8">
+        <!-- Agent Settings -->
+        <div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Agent Configuration</h2>
+            
+            <div class="space-y-6">
+                <!-- Model Selection -->
+                <div>
+                    <label class="block text-sm font-medium mb-2">Model</label>
+                    <select class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2">
+                        <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile</option>
+                        <option value="mixtral-8x7b-32768">mixtral-8x7b-32768</option>
+                        <option value="gemma2-9b-it">gemma2-9b-it</option>
+                    </select>
+                </div>
+                
+                <!-- Temperature -->
+                <div>
+                    <label class="block text-sm font-medium mb-2">
+                        Temperature: <span id="temp-value" class="font-mono">0.4</span>
+                    </label>
+                    <input type="range" min="0" max="2" step="0.1" value="0.4" 
+                           class="w-full accent-blue-600" id="temperature-range">
+                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>Precise</span>
+                        <span>Balanced</span>
+                        <span>Creative</span>
+                    </div>
+                </div>
+                
+                <!-- Max Steps -->
+                <div>
+                    <label class="block text-sm font-medium mb-2">Max Reasoning Steps</label>
+                    <input type="number" min="1" max="50" value="15" 
+                           class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2">
+                </div>
+            </div>
+        </div>
+        
+        <!-- UI Settings -->
+        <div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Interface Settings</h2>
+            
+            <div class="space-y-4">
+                <!-- Theme -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="font-medium">Dark Mode</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Toggle dark/light theme</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" id="theme-toggle">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+                
+                <!-- Stream Responses -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="font-medium">Stream Responses</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Show responses as they're generated</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="flex gap-4">
+            <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                Save Changes
+            </button>
+            <button class="px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
+                Reset to Defaults
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('temperature-range').addEventListener('input', function(e) {
+        document.getElementById('temp-value').textContent = e.target.value;
+    });
+    
+    document.getElementById('theme-toggle').addEventListener('change', function(e) {
+        const isDark = e.target.checked;
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+</script>
+{% endblock %}

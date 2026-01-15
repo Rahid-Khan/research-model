@@ -1,0 +1,94 @@
+<div class="flex flex-col h-full bg-gray-50 dark:bg-gray-900 overflow-hidden">
+    <!-- Top Section: Controls & Memory -->
+    <div id="context-panel-top" class="shrink-0 flex flex-col overflow-hidden" style="height: 50%; min-height: 200px;">
+        <div
+            class="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between shrink-0 bg-gray-50 dark:bg-gray-900">
+            <h3 class="font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
+                    </path>
+                </svg>
+                Context
+            </h3>
+            <button id="close-context" class="lg:hidden text-gray-500 hover:text-gray-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 custom-scrollbar">
+            <!-- System Prompt -->
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">System
+                        Prompt</span>
+                    <button class="text-[10px] text-blue-500 hover:underline leading-none">Edit</button>
+                </div>
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-100 dark:border-gray-800 text-sm text-gray-600 dark:text-gray-400 leading-relaxed italic">
+                    You are an MCP research assistant...
+                </div>
+            </div>
+
+            <!-- Active Memory -->
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Active
+                        Memory</span>
+                    <span
+                        class="text-[10px] bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full leading-none">3
+                        vectors</span>
+                </div>
+                <div class="space-y-2">
+                    <div
+                        class="bg-white dark:bg-gray-800 rounded-lg p-2 border border-blue-200 dark:border-blue-900/50 shadow-sm">
+                        <div class="text-xs font-medium dark:text-gray-200">Current session</div>
+                        <div class="text-[10px] text-gray-500 mt-0.5">Started 5 minutes ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Context Usage -->
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Context
+                        Usage</span>
+                    <span class="text-[10px] text-gray-400 leading-none">1.2K / 8K</span>
+                </div>
+                <div class="h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-blue-500 rounded-full" style="width: 15%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vertical Resizer for Side Panel -->
+    <div id="resizer-context-v"
+        class="resizer-v h-1.5 shrink-0 hover:bg-blue-500/30 transition-colors cursor-ns-resize"></div>
+
+    <!-- Bottom Section: Available Tools -->
+    <div id="context-panel-bottom" class="flex-1 overflow-hidden flex flex-col">
+        <div
+            class="px-4 py-2 border-b border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 flex items-center justify-between shrink-0">
+            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Available Tools</span>
+            <span
+                class="text-[10px] bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full leading-none">0
+                active</span>
+        </div>
+        <div id="context-tools-list" class="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar">
+            <!-- Tools populated dynamically -->
+            <div class="text-center py-4 text-xs text-gray-500 italic">
+                Loading tools...
+            </div>
+        </div>
+        <div class="p-3 border-t border-gray-200 dark:border-gray-800 shrink-0">
+            <button id="clear-context"
+                class="w-full py-2 text-xs text-gray-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg border border-gray-200 dark:border-gray-800 transition-all">
+                Clear Context
+            </button>
+        </div>
+    </div>
+</div>

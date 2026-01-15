@@ -1,0 +1,9 @@
+Flask
+Flask-CORS
+Flask-SSE
+python-dotenv
+langchain-groq
+mcp-use
+aiohttp
+asyncio
+websockets

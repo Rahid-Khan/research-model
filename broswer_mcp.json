@@ -1,0 +1,58 @@
+{
+  "mcpServers": {
+    "crossref": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@botanicastudios/crossref-mcp"
+      ]
+    },
+    "arxiv": {
+      "command": "uvx",
+      "args": [
+        "iowarp-agent-toolkit",
+        "mcp-server",
+        "arxiv"
+      ],
+      "env": {
+        "DOWNLOAD_DIR": "e:/code/agents/mcp-agent-ui/downloads",
+        "PAPER_DIR": "e:/code/agents/mcp-agent-ui/downloads"
+      }
+    },
+    "duckduckgo-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "duckduckgo-mcp-server"
+      ]
+    },
+    "playwright": {
+      "command": "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\mcp-server-playwright.cmd",
+      "args": []
+    },
+    "pubmed-mcp-server": {
+      "command": "npx",
+      "args": [
+        "@cyanheads/pubmed-mcp-server"
+      ],
+      "env": {
+        "MCP_LOG_LEVEL": "error",
+        "MCP_TRANSPORT_TYPE": "https",
+        "MCP_HTTP_PORT": "3017",
+        "NCBI_API_KEY": "d5206c6f5b581896dfe2b9efa8f09481a508"
+      }
+    },
+    "semantic-scholar-mcp": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-semantic-scholar"
+      ],
+      "env": {
+        "SEMANTIC_SCHOLAR_API_KEY": "Wkl8w044f165Z7aeMtcbU86X5OdSdO1K93tVMSHH",
+        "LOG_LEVEL": "ERROR",
+        "PYTHONUTF8": "1",
+        "PYTHONIOENCODING": "utf-8"
+      }
+    }
+  }
+}

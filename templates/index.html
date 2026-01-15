@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="h-full flex flex-col">
+    <!-- Top Bar -->
+    {% include "partials/topbar.html" %}
+
+    <!-- Main Layout -->
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Context Panel (Left) - Fixed 25% -->
+        <aside id="context-panel"
+            class="w-1/4 min-w-[300px] border-r border-gray-200 dark:border-gray-700 flex flex-col">
+            {% include "partials/context_panel.html" %}
+        </aside>
+
+        <!-- Chat Workspace (Center) - Fixed 50% -->
+        <main id="chat-workspace"
+            class="w-1/2 border-r border-gray-200 dark:border-gray-700 flex flex-col bg-white dark:bg-gray-950">
+            <!-- Chat Messages Container -->
+            <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-6 custom-scrollbar">
+                <!-- Messages will be inserted here by JavaScript -->
+                <div class="text-center text-gray-400 dark:text-gray-500 py-12">
+                    <div class="text-2xl font-bold tracking-tight opacity-20">MCP RESEARCH</div>
+                    <div class="text-xs mt-2 uppercase tracking-widest opacity-40">Agent ready for commands</div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div id="resizer-input" class="resizer-v"></div>
+            <div id="input-area"
+                class="border-t border-gray-200 dark:border-gray-700 p-6 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm">
+                <div class="max-w-3xl mx-auto">
+                    <div class="relative group">
+                        <textarea id="message-input" rows="3"
+                            class="w-full px-5 py-4 pr-24 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none resize-none transition-all shadow-sm"
+                            placeholder="Type a research query... (⌘ + Enter to send)"></textarea>
+
+                        <div class="absolute right-3 bottom-3 flex items-center gap-2">
+                            <button id="stop-button"
+                                class="px-4 py-2 text-xs font-bold uppercase tracking-widest bg-red-500 hover:bg-red-600 text-white rounded-xl hidden transition-all shadow-lg shadow-red-500/20">
+                                Stop
+                            </button>
+
+                            <button id="send-button"
+                                class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs uppercase tracking-widest disabled:opacity-30 disabled:grayscale transition-all shadow-lg shadow-blue-500/20"
+                                disabled>
+                                Send
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tool Shortcuts -->
+                    <div id="tool-shortcuts" class="flex flex-wrap gap-2 mt-4">
+                        <!-- Shortcuts will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Tool Viewer (Right) - Fixed 25% -->
+        <aside id="tool-viewer" class="w-1/4 min-w-[320px] flex flex-col">
+            {% include "partials/tool_viewer.html" %}
+        </aside>
+    </div>
+</div>
+
+<!-- Message Template (Hidden) -->
+<template id="message-template">
+    <div class="message group">
+        <div class="flex gap-3">
+            <div class="flex-shrink-0">
+                <div class="avatar w-8 h-8 rounded-full flex items-center justify-center"></div>
+            </div>
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="font-medium text-sm"></span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 timestamp"></span>
+                </div>
+                <div class="prose dark:prose-invert max-w-none"></div>
+                <div class="mt-2 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button class="copy-btn text-xs text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                        Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Tool Call Template -->
+<template id="tool-call-template">
+    <div class="tool-call bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4 rounded-r">
+        <div class="flex items-center gap-2 mb-2">
+            <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <span class="font-medium text-sm"></span>
+            <span
+                class="text-xs px-2 py-1 rounded bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-300"></span>
+        </div>
+        <div class="text-xs font-mono bg-white dark:bg-gray-800 p-3 rounded overflow-x-auto"></div>
+    </div>
+</template>
+
+<!-- Tool Result Template -->
+<template id="tool-result-template">
+    <div class="tool-result">
+        <div class="flex items-center gap-2 mb-2">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="font-medium text-sm">Tool Result</span>
+            <span
+                class="text-xs px-2 py-1 rounded bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-300"></span>
+        </div>
+        <div class="text-xs font-mono bg-white dark:bg-gray-800 p-3 rounded overflow-x-auto"></div>
+    </div>
+</template>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Initialize theme
+    document.addEventListener('DOMContentLoaded', function () {
+        const theme = localStorage.getItem('theme') || '{{ theme }}';
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Initialize the main application
+        if (typeof App !== 'undefined') {
+            App.init();
+        }
+    });
+</script>
+{% endblock %}
